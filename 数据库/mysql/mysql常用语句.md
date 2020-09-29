@@ -92,3 +92,15 @@ select d.model_name,m.electron_uuid, json_array(concat('http://cdn.infinigo.cn/i
 sql = '''SELECT id ,model_name, electron_uuid,images,images_path from tb_electron_digikey   where images  in (select  images  from tb_electron_digikey  group  by  images   having  count(images) > 1) 
     and id not in (select min(id) from  tb_electron_digikey  group by images  having count(images)>1);'''
 ```
+
+
+1. 修改某张表里的特定的值：
+```
+注：（修改之前事先select一下看看效果）
+SELECT REPLACE(icon,'https://img.icmori.com','https://img.infinigo.cn') from tb_user where icon != '';
+
+第二步在进行修改
+UPDATE tb_user set icon = REPLACE(icon,'https://img.icmori.com','https://img.infinigo.cn') where icon != '';
+
+
+```

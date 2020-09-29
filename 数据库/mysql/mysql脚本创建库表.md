@@ -477,3 +477,28 @@ CREATE TABLE IF NOT EXISTS `tb_electron_685` (
   key idx_category_id (category_id) USING BTREE,
   key idx_factory_id (factory_id) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+ALTER TABLE tb_user_extra add logins int(11) DEFAULT 0 COMMENT '登录次数'; --添加用户登录次数字段
+
+alter table tb_feedback add (
+`audit_status` int(10) DEFAULT NULL COMMENT '受理状态：0：待受理，1：受理中， 2：已解决， 3：未解决',
+      `process_time` datetime DEFAULT NULL COMMENT '受理时间',
+      `question_category` int(10) DEFAULT NULL COMMENT '反馈问题分类：0：建议或意见，1：业务问题，2：产品问题',
+      `user_evaluate` int(10) DEFAULT 0 COMMENT '用户评价：0：未评价，1：非常满意，2：满意， 3：不满意',
+      `receiver` VARCHAR(128) DEFAULT '' COMMENT '受理人'
+    
+)
+
+
+
+SELECT * from tb_user_extra where uid='32'
+
+
+select a.id,a.username,a.area_code,a.phone,a.email,a.real_name,a.icon,a.company,a.position,a.address,
+    a.create_at,b.is_lock,b.last_login_time,b.last_login_time,b.logins,b.is_merchant,b.last_login_ip from db_user.tb_user a, db_user.tb_user_extra b where  a.id = b.uid;
+
+
+SELECT count(*) from db_user.tb_user a, db_user.tb_user_extra b where  a.id = b.uid;
