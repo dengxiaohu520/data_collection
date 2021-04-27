@@ -1,2 +1,21 @@
 生成pycharm激活码地址：http://idea.medeming.com/jets
 生成pycharm激活码的地址：http://www.lookdiv.com/    钥匙：lookdiv.com
+
+
+
+
+安装pycharm专业版的流程：
+
+1.双击 “pycharm-professional-2019.3.3.exe” 安装（注意： 首次不运行，最后点结束）
+
+2.把“jetbrains-agent-v3.0.3.ed81.605”文件放在pycharm的安装路径下： F:\install file\Pycharm\pycharm-professional-2019.3.3
+
+3. 运行pycharm, 选择试用
+
+3. 点击 Help  -- Edit Custom VM Options... 在打开的文件里面添加一行： F:\install file\Pycharm\pycharm-professional-2019.3.3\jetbrains-agent-v3.0.3.ed81.605
+
+4. 然后退出，重新打开软件
+
+5. 输入激活码
+
+6. 点击 Help -->About  查看是否成功

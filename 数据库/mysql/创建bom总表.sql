@@ -180,3 +180,94 @@ CREATE TABLE `tb_order`  (
   `update_uid` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '修改人id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+-- 创建元器件商家表（IC交易网）
+CREATE TABLE IF NOT EXISTS `tb_electron_merchant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT comment '自增 id',
+  `electron_uuid` varchar(36) not null DEFAULT '' COMMENT '元器件uuid',
+  `part_number` varchar(256) not null DEFAULT '' COMMENT '器件型号名称',
+  `merchant_name` varchar(256) not null DEFAULT '' COMMENT '商家名称',
+  `merchant_url` varchar(256) not null DEFAULT '' COMMENT '商家在IC交易网上的url',
+  `phone` json NULL COMMENT '固定电话、联系人',
+  `qq` json NULL COMMENT 'QQ',
+  `member_rete` varchar(256) not null DEFAULT '' COMMENT '商家在ic交易网的评级',
+  `paid_listing` varchar(256) not null DEFAULT '' COMMENT '现货排名（ic交易网）',
+  `factory` varchar(256) not null DEFAULT '' COMMENT '厂牌',
+  `batch_number` varchar(256) not null DEFAULT '' COMMENT '元器件批号',
+  `repertory` int(11) not null DEFAULT 0 COMMENT '元器件库存',
+  `pakaging` varchar(256) not null DEFAULT '' COMMENT '元器件封装',
+  `explain` varchar(256) not null DEFAULT '' COMMENT '说明',
+  `storage_location` varchar(256) not null DEFAULT '' COMMENT '库位',
+  `mobile` varchar(256) not null DEFAULT '' COMMENT '手机号',
+  `faxes` varchar(256) not null DEFAULT '' COMMENT '传真',
+  `business_address` varchar(256) not null DEFAULT '' COMMENT '办公地址',
+  `address` varchar(256) not null DEFAULT '' COMMENT '地址',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+# 增加元器件商家表字段
+ALTER TABLE db_business_electron.tb_electron_merchant
+ADD  goods_add_num  int(11) NULL DEFAULT 0 COMMENT '增量',
+ADD  goods_start_num  int(11) NULL DEFAULT 0 COMMENT '起订量',
+ADD  external_time  varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '香港货期',
+ADD  external_time_unit  int(11) NULL DEFAULT NULL COMMENT '香港货期单位（1、工作日 2、周）',
+ADD  interior_time  varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '内地货期',
+ADD  interior_time_unit  int(11) NULL DEFAULT NULL COMMENT '内地货期单位（1、工作日 2、周）',
+ADD  packing_id  int(11) NULL DEFAULT NULL COMMENT '包装id',
+ADD  interior_price  decimal(10, 2) UNSIGNED NULL DEFAULT 0.00 COMMENT '内地价格',
+ADD  external_price  decimal(10, 2) UNSIGNED NULL DEFAULT 0.00 COMMENT '香港价格',
+ADD  store_type  varchar(88) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '3' COMMENT '商家类型（1、制造商 2、代理商  3、现货商）',
+ADD  gradient  varchar(88) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '梯度价格',
+ADD  store_id  varchar(36) NULL DEFAULT NULL COMMENT '商家uuid(区分商城端商家id)'
+
+
+
+# 增加BOM元器件推荐表字段
+ALTER TABLE db_user.tb_bom_recommend_electron
+ADD  factory_recommend  int(11) NULL DEFAULT 0 COMMENT '是否原厂推荐(0: 不是， 1.是)',
+ADD  pintopin  int(11) NULL DEFAULT 0 COMMENT '是否pintopin替代(0: 不是， 1.是)',
+ADD  innovate  int(11) NULL DEFAULT 0 COMMENT '是否创新替代(0: 不是， 1.是)'
+
+
+
+# 增加原始bom表字段
+ALTER TABLE db_user.tb_bom_electron
+ADD  model_name  varchar(128) NULL DEFAULT '' COMMENT '型号名称(不用于页面展示，只用于查询更多替代型号)'
+
+
+ALTER TABLE db_user.tb_bom_electron
+ADD  goods_show_price  decimal(10, 2) NULL DEFAULT 0.00 COMMENT '商城端展示价格';
+ALTER TABLE db_user.tb_bom_recommend_electron
+ADD  goods_show_price  decimal(10, 2) NULL DEFAULT 0.00 COMMENT '商城端展示价格';
+
+
+ALTER TABLE db_user.tb_bom_electron
+ADD  origin_factory  varchar(128) NULL DEFAULT '' COMMENT '推荐厂牌';
+
+
+
+
+
+-- 今日大瓜目标网站分类
+CREATE TABLE IF NOT EXISTS `tb_portal_category_origin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT comment '主键 id',
+  `origin_site_category` varchar(256) NOT NULL default '' comment '原网站分类名',
+  `origin_category_url` varchar(528) not null DEFAULT '' COMMENT '原网站分类url',
+  `origin_site` varchar(256) NOT NULL default'' comment '网站名称',
+  `site_url` varchar(256) not null DEFAULT '' COMMENT '网站url地址',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
