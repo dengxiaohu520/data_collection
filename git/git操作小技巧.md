@@ -20,3 +20,26 @@ git reset --hard commit_id
 
 node:（commit_id = git log查看上一个id）
 ```
+
+4. 查看上次文件中修改的内容
+```
+git diff XXX(文件名)
+```
+
+5. git区分
+```
+<<<<<<< HEAD
+
+本地代码
+
+=======
+
+拉下来的代码
+
+>>>>>>>
+```
+
+6. 查看冲突是否解决
+```
+git diff --check
+```

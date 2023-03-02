@@ -150,6 +150,11 @@ $ pipenv install -r requirements.txt
 $ pipenv install -r dev-requirements.txt --dev
 ```
 
+12. 查看虚拟环境路劲：
+```
+pipenv --venv
+```
+
 
 
 
@@ -161,3 +166,6 @@ pip install --user --upgrade --upgrade-strategy eager pipenv wheel
 
 pip uninstall pipenv
 pip install pipenv
+
+
+
